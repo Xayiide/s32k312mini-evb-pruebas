@@ -1,0 +1,16 @@
+# Ignora directorios de compilación
+Debug_FLASH/
+Release_FLASH/
+
+# Ajustes locales de Eclipse
+.settings/
+
+# Código generado
+generate/
+RTD/
+board/
+
+# Cosas de S32DS
+.default_mex
+ClockConfigurationMappings.txt
+ClockYaml.txt
