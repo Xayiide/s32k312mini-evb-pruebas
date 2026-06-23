@@ -21,10 +21,15 @@ struct spi_cfg {
 };
 
 
-static struct spi_cfg cfg;
+static struct spi_cfg spi;
 
-uint8 spi_write(uint8 b);
+static uint8 spi_write(uint8 b);
 
+/*
+ * @brief Initialize SPI module
+ * @param None
+ * @return None
+ */
 void spi_init(void)
 {
 	uint8  i;
@@ -34,31 +39,36 @@ void spi_init(void)
 
 	id = pit_add_timer(pit_ms_to_ticks(RX_PERIOD_MS));
 	if (id >= 0)
-		cfg.rx_timer_id = id;
+		spi.rx_timer_id = id;
 
 	id = pit_add_timer(pit_ms_to_ticks(TX_PERIOD_MS));
 	if (id >= 0)
-		cfg.tx_timer_id = id;
+		spi.tx_timer_id = id;
 
-	for (i = 0; i < sizeof(cfg.spi_rx_buf); i++) {
-		cfg.spi_rx_buf[i] = 0xFF;
+	for (i = 0; i < sizeof(spi.spi_rx_buf); i++) {
+		spi.spi_rx_buf[i] = 0xFF;
 	}
 
-	cfg.spi_rx_aux = 0xFF;
+	spi.spi_rx_aux = 0xFF;
 }
 
+/*
+ * @brief Main SPI module function
+ * @param None
+ * @return None
+ */
 void spi_main(void)
 {
 	static uint8 st = 0;
 	uint8 r = 0;
 
 
-	if (pit_elapsed(cfg.rx_timer_id) == 1) {
-		pit_restart_timer(cfg.rx_timer_id);
+	if (pit_elapsed(spi.rx_timer_id) == 1) {
+		pit_restart_timer(spi.rx_timer_id);
 	}
 
-	if (pit_elapsed(cfg.tx_timer_id) == 1) {
-		pit_restart_timer(cfg.tx_timer_id);
+	if (pit_elapsed(spi.tx_timer_id) == 1) {
+		pit_restart_timer(spi.tx_timer_id);
 		if (st == 0) {
 			Siul2_Dio_Ip_WritePin(pin_prueba_PORT, pin_prueba_PIN, 0U);
 			st = 1;

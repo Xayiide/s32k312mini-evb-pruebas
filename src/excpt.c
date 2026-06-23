@@ -5,7 +5,11 @@
 
 static void excpt_set_field(uint32 mask, uint32 value);
 
-
+/*
+ * @brief Enable all exceptions: memfault, busfault and usagefault
+ * @param None
+ * @return None
+ */
 void excpt_ena_all(void)
 {
 	uint32_t reg = S32_SCB->SHCSR;
@@ -21,6 +25,11 @@ void excpt_ena_all(void)
 
 }
 
+/*
+ * @brief Disable all exceptions: memfault, busfault, usagefault
+ * @param None
+ * @return None
+ */
 void excpt_dis_all(void)
 {
 	uint32_t reg = S32_SCB->SHCSR;
@@ -32,18 +41,33 @@ void excpt_dis_all(void)
 	S32_SCB->SHCSR = reg;
 }
 
+/*
+ * @brief Enable or disable memfault
+ * @param state: status of the exception
+ * @return None
+ */
 void excpt_set_mem(enum excpt_state state)
 {
 	excpt_set_field(S32_SCB_SHCSR_MEMFAULTENA_MASK,
 	                S32_SCB_SHCSR_MEMFAULTENA(state));
 }
 
+/*
+ * @brief Enable or disable busfault
+ * @param state: status of the exception
+ * @return None
+ */
 void excpt_set_bus(enum excpt_state state)
 {
 	excpt_set_field(S32_SCB_SHCSR_BUSFAULTENA_MASK,
 	                S32_SCB_SHCSR_BUSFAULTENA(state));
 }
 
+/*
+ * @brief Enable or disable usagefault
+ * @param state: status of the exception
+ * @return None
+ */
 void excpt_set_usg(enum excpt_state state)
 {
 	excpt_set_field(S32_SCB_SHCSR_USGFAULTENA_MASK,
@@ -51,11 +75,21 @@ void excpt_set_usg(enum excpt_state state)
 }
 
 
-
+/*
+ * @brief NMI interrupt handler
+ * @param None
+ * @return None
+ */
 void NMI_Handler(void)
 {
 	while(TRUE){};
 }
+
+/*
+ * @brief Hardfault handler
+ * @param None
+ * @return None
+ */
 void HardFault_Handler(void)
 {
 	volatile uint32 hfsr  = S32_SCB->HFSR;
@@ -73,6 +107,11 @@ void HardFault_Handler(void)
 	}
 }
 
+/*
+ * @brief Memfault handler
+ * @param None
+ * @return None
+ */
 void MemManage_Handler(void)
 {
 	volatile uint32 cfsr  = S32_SCB->CFSR;
@@ -87,6 +126,12 @@ void MemManage_Handler(void)
 
 	}
 }
+
+/*
+ * @brief Busfualt handler
+ * @param None
+ * @return None
+ */
 void BusFault_Handler(void)
 {
 	volatile uint32 cfsr = S32_SCB->CFSR;
@@ -101,6 +146,12 @@ void BusFault_Handler(void)
 
 	}
 }
+
+/*
+ * @brief Usagefault handler
+ * @param None
+ * @return None
+ */
 void UsageFault_Handler(void)
 {
 	volatile uint32 cfsr  = S32_SCB->CFSR;
@@ -114,7 +165,12 @@ void UsageFault_Handler(void)
 	}
 }
 
-
+/*
+ * @brief Set a field in the SHCSR register
+ * @param mask: uint32 for the mask
+ * @param value: uint32 for the value to be set
+ * @return None
+ */
 void excpt_set_field(uint32 mask, uint32 value)
 {
 	uint32 reg = S32_SCB->SHCSR;

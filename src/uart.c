@@ -13,6 +13,11 @@
 static uint8  rxBuffer[RX_BUFFER_SIZE];
 static sint16 timer_id;
 
+/*
+ * @brief Initialize UART module
+ * @param None
+ * @return None
+ */
 void uart_init(void)
 {
 	Uart_Init(NULL_PTR);
@@ -23,6 +28,11 @@ void uart_init(void)
     timer_id = pit_add_timer(pit_ms_to_ticks(PROCESS_TIMER_MS));
 }
 
+/*
+ * @brief UART module main function
+ * @param None
+ * @return None
+ */
 void uart_main(void)
 {
 	Uart_StatusType rxst = UART_STATUS_NO_ERROR;

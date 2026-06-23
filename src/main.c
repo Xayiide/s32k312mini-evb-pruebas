@@ -22,7 +22,10 @@
 #include "spi.h"
 #include "button.h"
 #include "uart.h"
+#include "adc.h"
+#include "temt6000.h"
 
+#include "temt6000.h"
 
 /*!
   \brief The main function for the project.
@@ -55,7 +58,10 @@ int main(void)
 	spi_init();
 	button_init();
 	uart_init();
+	adc_init();
+	temt6000_init();
 	excpt_ena_all();
+
 
 	//test_div0();
 
@@ -65,6 +71,8 @@ int main(void)
 		spi_main();
 		button_main();
 		uart_main();
+		adc_main();
+		temt6000_main();
 	}
 
 }

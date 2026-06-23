@@ -15,12 +15,22 @@ static uint8 bsw3_st = 0;
 static void handle_bsw2(void);
 static void handle_bsw3(void);
 
+/*
+ * @brief Initialize button module
+ * @param None
+ * @return None
+ */
 void button_init(void)
 {
 	bsw2_last_st = Siul2_Dio_Ip_ReadPin(BUTTONSW2_PORT, BUTTONSW2_PIN);
 	bsw3_last_st = Siul2_Dio_Ip_ReadPin(BUTTONSW3_PORT, BUTTONSW3_PIN);
 }
 
+/*
+ * @brief Main function for the button module
+ * @param None
+ * @return None
+ */
 void button_main(void)
 {
 	uint8 sw2_pressed = 0, sw3_pressed = 0;
@@ -53,7 +63,11 @@ void button_main(void)
 }
 
 
-
+/*
+ * @brief Handle SW2 button press
+ * @param None
+ * @return None
+ */
 void handle_bsw2(void)
 {
 	static uint8 st = 0;
@@ -68,6 +82,11 @@ void handle_bsw2(void)
 	}
 }
 
+/*
+ * @brief Handle SW3 button press
+ * @param None
+ * @return None
+ */
 void handle_bsw3(void)
 {
 

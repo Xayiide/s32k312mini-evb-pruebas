@@ -33,7 +33,11 @@ struct pitmgr {
 
 static struct pitmgr pit;
 
-
+/*
+ * @brief PIT callback function
+ * @param None
+ * @return None
+ */
 void pit_callback(uint8 channel)
 {
 	(void) channel;
