@@ -23,9 +23,9 @@
 #include "button.h"
 #include "uart.h"
 #include "adc.h"
+#include "i2c.h"
 #include "temt6000.h"
-
-#include "temt6000.h"
+#include "veml7700.h"
 
 /*!
   \brief The main function for the project.
@@ -59,9 +59,11 @@ int main(void)
 	button_init();
 	uart_init();
 	adc_init();
+	i2c_init();
 	temt6000_init();
+	veml7700_init();
+	veml7700_add_dev(0x10);
 	excpt_ena_all();
-
 
 	//test_div0();
 
@@ -73,6 +75,7 @@ int main(void)
 		uart_main();
 		adc_main();
 		temt6000_main();
+		veml7700_main();
 	}
 
 }

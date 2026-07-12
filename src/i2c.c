@@ -1,10 +1,10 @@
 #include "Lpi2c_Ip.h" /* Lpi2c_Ip_MasterInit */
 #include "Lpi2c_Ip_Sa_PBcfg.h" /* I2c_Lpi2cMaster_HwChannel1_Channel0 */
+#include "Platform_Types.h" /* uint */
 
 #include "i2c.h"
 #include "pit.h"
 
-#define I2C_INSTANCE    1U
 #define RX_PERIOD_MS   10U
 #define TX_PERIOD_MS   10U
 #define RX_BUFFER_SIZE 32U

@@ -33,6 +33,8 @@ struct pitmgr {
 
 static struct pitmgr pit;
 
+static uint8 id_valid(sint16 id);
+
 /*
  * @brief PIT callback function
  * @param None
@@ -109,7 +111,7 @@ sint16 pit_add_timer(uint32 period)
  */
 void pit_restart_timer(sint16 id)
 {
-	if (id < pit.ntimers) {
+	if (id_valid(id)) {
 		pit.timers[id].counter = 0;
 	}
 }
@@ -123,7 +125,7 @@ uint8 pit_elapsed(sint16 id)
 {
 	uint8 elapsed = 0;
 
-	if (id < pit.ntimers) {
+	if (id_valid(id) == 1) {
 		if (pit.timers[id].counter == pit.timers[id].limit)
 			elapsed = 1;
 	}
@@ -139,7 +141,7 @@ uint8 pit_elapsed(sint16 id)
  */
 void pit_set_count(sint16 id, uint32 count)
 {
-	if (id < pit.ntimers) {
+	if (id_valid(id) == 1) {
 		pit.timers[id].counter = count;
 	}
 }
@@ -152,7 +154,7 @@ void pit_set_count(sint16 id, uint32 count)
  */
 void pit_set_limit(sint16 id, uint32 limit)
 {
-	if (id < pit.ntimers) {
+	if (id_valid(id) == 1) {
 		pit.timers[id].limit = limit;
 	}
 }
@@ -169,4 +171,21 @@ uint32 pit_ms_to_ticks(uint32 ms)
 	ticks = ms * PIT_MS_TICKS;
 
 	return ticks;
+}
+
+/* Funciones estáticas  */
+
+/*
+ * @brief Check if a given id is valid
+ * @param id id to check
+ * @return uint8 1 if id is valid, 0 if it's not
+ */
+uint8 id_valid(sint16 id) {
+	uint8 valid = 0;
+
+	if (id < pit.ntimers && id >= 0) {
+		valid = 1;
+	}
+
+	return valid;
 }

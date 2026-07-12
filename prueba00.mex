@@ -40,6 +40,8 @@
                <pin_label pin_num="145" pin_signal="PTA15" label="UART_RX" identifier="UART_RX"/>
                <pin_label pin_num="143" pin_signal="PTA16" label="UART_TX" identifier="UART_TX"/>
                <pin_label pin_num="8" pin_signal="PTD0" label="ADC_RD" identifier="ADC_RD"/>
+               <pin_label pin_num="141" pin_signal="PTC6" label="I2C_SDA" identifier="I2C_SDA"/>
+               <pin_label pin_num="140" pin_signal="PTC7" label="I2C_SCL" identifier="I2C_SCL"/>
             </pin_labels>
          </pins_profile>
          <functions_list>
@@ -119,6 +121,16 @@
                      </pin_features>
                   </pin>
                   <pin peripheral="ADC0" signal="adc0_p1" pin_num="8" pin_signal="PTD0"/>
+                  <pin peripheral="LPI2C1" signal="lpi2c1_sda" pin_num="141" pin_signal="PTC6">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT/OUTPUT"/>
+                     </pin_features>
+                  </pin>
+                  <pin peripheral="LPI2C1" signal="lpi2c1_scl" pin_num="140" pin_signal="PTC7">
+                     <pin_features>
+                        <pin_feature name="direction" value="INPUT/OUTPUT"/>
+                     </pin_features>
+                  </pin>
                </pins>
             </function>
          </functions_list>
@@ -2426,6 +2438,38 @@
                                        <setting name="PortPinInvertControl" value="false"/>
                                        <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
                                        <setting name="PortPinId" value="14"/>
+                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
+                                    </struct>
+                                    <struct name="14">
+                                       <setting name="Name" value="PortPin_14"/>
+                                       <setting name="PortPinPue" value="false"/>
+                                       <setting name="PortPinPus" value="false"/>
+                                       <setting name="PortPinSafeMode" value="false"/>
+                                       <setting name="PortPinDse" value="false"/>
+                                       <setting name="PortPinWithReadBack" value="false"/>
+                                       <setting name="PortPinPke" value="false"/>
+                                       <setting name="PortPinIfe" value="false"/>
+                                       <setting name="PortPinDirectionChangeable" value="true"/>
+                                       <setting name="PortPinModeChangeable" value="true"/>
+                                       <setting name="PortPinInvertControl" value="false"/>
+                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
+                                       <setting name="PortPinId" value="15"/>
+                                       <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
+                                    </struct>
+                                    <struct name="15">
+                                       <setting name="Name" value="PortPin_15"/>
+                                       <setting name="PortPinPue" value="false"/>
+                                       <setting name="PortPinPus" value="false"/>
+                                       <setting name="PortPinSafeMode" value="false"/>
+                                       <setting name="PortPinDse" value="false"/>
+                                       <setting name="PortPinWithReadBack" value="false"/>
+                                       <setting name="PortPinPke" value="false"/>
+                                       <setting name="PortPinIfe" value="false"/>
+                                       <setting name="PortPinDirectionChangeable" value="true"/>
+                                       <setting name="PortPinModeChangeable" value="true"/>
+                                       <setting name="PortPinInvertControl" value="false"/>
+                                       <setting name="PortPinSiul2Instance" value="SIUL2_0"/>
+                                       <setting name="PortPinId" value="16"/>
                                        <setting name="PortPinInitialMode" value="PORT_GPIO_MODE"/>
                                     </struct>
                                  </array>
