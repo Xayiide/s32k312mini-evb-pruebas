@@ -181,7 +181,7 @@ void veml7700_main(void)
 		case DEV_READY_ST:
 			read_reg(dev, CMD_ALS_DATA, &als_count);
 			cfg_changed = autorange(dev, als_count);
-			if (cfg_changed && 0) {
+			if (cfg_changed) {
 				/* Si ha cambiado la config:
 				 * 1. Configuramos el sensor con la nueva
 				 * 2. Establecemos el tempo. a esperar IT_TIME + reiniciar tempo.

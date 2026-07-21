@@ -25,13 +25,13 @@ struct pit_timer {
 	uint32          limit;
 };
 
-struct pitmgr {
+struct pit_cfg {
 	struct pit_timer timers[TIMERS_ARRAY_SIZE];
 	uint8            ntimers;
 };
 
 
-static struct pitmgr pit;
+static struct pit_cfg pit;
 
 static uint8 id_valid(sint16 id);
 

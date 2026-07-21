@@ -480,6 +480,16 @@
                   <data type="Version">1.0.0</data>
                </feature>
             </dependency>
+            <dependency resourceType="SWComponent" resourceId="platform.driver.FlexCAN" description="FlexCAN is not found in the toolchain/IDE project. The project will not compile!" problem_level="2" source="Peripherals">
+               <feature name="enabled" evaluation="equal">
+                  <data type="Boolean">true</data>
+               </feature>
+            </dependency>
+            <dependency resourceType="SWComponent" resourceId="platform.driver.FlexCAN" description="An unsupported version of the FlexCAN in the toolchain/IDE project. Required: ${required_value}, actual: ${actual_value}. The project might not compile correctly." problem_level="1" source="Peripherals">
+               <feature name="version" evaluation="equivalent">
+                  <data type="Version">0.1.0</data>
+               </feature>
+            </dependency>
             <dependency resourceType="Tool" resourceId="Clocks" description="The Clocks tool is required by the Peripherals tool, but it is disabled." problem_level="2" source="Peripherals">
                <feature name="enabled" evaluation="equal">
                   <data>true</data>
@@ -517,6 +527,9 @@
             <file path="generate/include/Etpu_Pwm_Ip_Cfg.h" update_enabled="true"/>
             <file path="generate/include/Etpu_Pwm_Ip_CfgDefines.h" update_enabled="true"/>
             <file path="generate/include/Etpu_Pwm_Ip_PBcfg.h" update_enabled="true"/>
+            <file path="generate/include/FlexCAN_Ip_Cfg.h" update_enabled="true"/>
+            <file path="generate/include/FlexCAN_Ip_CfgDefines.h" update_enabled="true"/>
+            <file path="generate/include/FlexCAN_Ip_Sa_PBcfg.h" update_enabled="true"/>
             <file path="generate/include/FlexPwm_Ip_Cfg.h" update_enabled="true"/>
             <file path="generate/include/FlexPwm_Ip_CfgDefines.h" update_enabled="true"/>
             <file path="generate/include/FlexPwm_Ip_PBcfg.h" update_enabled="true"/>
@@ -584,6 +597,7 @@
             <file path="generate/src/Emios_Mcl_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Emios_Pwm_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Etpu_Pwm_Ip_PBcfg.c" update_enabled="true"/>
+            <file path="generate/src/FlexCAN_Ip_Sa_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/FlexPwm_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Flexio_Mcl_Ip_PBcfg.c" update_enabled="true"/>
             <file path="generate/src/Flexio_Pwm_Ip_PBcfg.c" update_enabled="true"/>
@@ -2717,6 +2731,82 @@
                               <array name="AdcThresholdControl"/>
                            </struct>
                         </array>
+                     </config_set>
+                  </instance>
+                  <instance name="FlexCAN" uuid="f419205f-c6dd-463f-9532-51116d5b5ded" type="FlexCAN" type_id="FlexCAN" mode="ip" enabled="true" comment="" custom_name_enabled="false" editing_lock="false">
+                     <config_set name="FlexCAN">
+                        <setting name="Name" value="FlexCAN"/>
+                        <struct name="ConfigTimeSupport">
+                           <setting name="POST_BUILD_VARIANT_USED" value="false"/>
+                           <setting name="IMPLEMENTATION_CONFIG_VARIANT" value="VARIANT-PRE-COMPILE"/>
+                        </struct>
+                        <array name="FlexCAN_Configurations">
+                           <struct name="0">
+                              <setting name="CanHwChannel" value="FLEXCAN_0"/>
+                              <setting name="Name" value="FlexCAN_Config0"/>
+                              <setting name="max_num_mb" value="16"/>
+                              <setting name="num_id_filters" value="FLEXCAN_RX_FIFO_ID_FILTERS_8"/>
+                              <setting name="is_rx_fifo_needed" value="false"/>
+                              <setting name="fd_enable" value="false"/>
+                              <setting name="flexcanMode" value="FLEXCAN_NORMAL_MODE"/>
+                              <struct name="FlexCANRamBlock" quick_selection="Default">
+                                 <setting name="Name" value="FlexCANRamBlock"/>
+                                 <setting name="Choice" value="FlexCANRamBlockUnified"/>
+                                 <struct name="FlexCANRamBlockUnified" quick_selection="Default">
+                                    <setting name="Name" value="FlexCANRamBlock"/>
+                                    <setting name="RamBlockUnifiedPayloadLength" value="FLEXCAN_PAYLOAD_SIZE_8"/>
+                                 </struct>
+                              </struct>
+                              <setting name="transfer_type" value="FLEXCAN_RXFIFO_USING_INTERRUPTS"/>
+                              <setting name="rxFifoDMAChannel" value="0"/>
+                              <setting name="extCbtEnable" value="false"/>
+                              <setting name="bitRateSwitch" value="false"/>
+                              <setting name="CanControllerFdISO" value="false"/>
+                              <setting name="CanControllerAutoBusOff" value="true"/>
+                              <setting name="CanRemoteRequestStore" value="false"/>
+                              <setting name="CanLowestBufferTransmittedFirst" value="false"/>
+                              <setting name="timeStampSurce" value="FLEXCAN_CAN_CLK_TIMESTAMP_SRC"/>
+                              <setting name="msgBuffTimeStampType" value="FLEXCAN_MSGBUFFTIMESTAMP_TIMER"/>
+                              <setting name="hrConfigType" value="FLEXCAN_TIMESTAMPCAPTURE_DISABLE"/>
+                              <setting name="pe_clock_frequency" value="1"/>
+                              <struct name="flexcan_time_segment">
+                                 <setting name="Name" value="FlexCAN_Ip_TimeSeg0"/>
+                                 <setting name="flexcan_cfg_propSeg" value="6"/>
+                                 <setting name="flexcan_cfg_phaseSeg1" value="7"/>
+                                 <setting name="flexcan_cfg_phaseSeg2" value="2"/>
+                                 <setting name="flexcan_cfg_preDivider" value="25"/>
+                                 <setting name="flexcan_cfg_rJumpwidth" value="1"/>
+                              </struct>
+                              <struct name="flexcan_time_segment_cbt">
+                                 <setting name="Name" value="FlexCAN_Ip_TimeSegCBT0"/>
+                                 <setting name="flexcan_cfg_propSeg" value="7"/>
+                                 <setting name="flexcan_cfg_phaseSeg1" value="6"/>
+                                 <setting name="flexcan_cfg_phaseSeg2" value="2"/>
+                                 <setting name="flexcan_cfg_preDivider" value="5"/>
+                                 <setting name="flexcan_cfg_rJumpwidth" value="2"/>
+                              </struct>
+                              <setting name="FlexCanCallback" value="Can0_Rx_Callback"/>
+                              <setting name="FlexCanErrorCallback" value="NULL_PTR"/>
+                              <setting name="num_enhanced_std_id_filters" value="0"/>
+                              <setting name="num_enhanced_ext_id_filters" value="0"/>
+                              <setting name="num_enhanced_watermark" value="0"/>
+                              <setting name="is_enhanced_rx_fifo_needed" value="false"/>
+                           </struct>
+                        </array>
+                        <struct name="FlexCAN_General">
+                           <setting name="Name" value="FlexCAN_General"/>
+                           <setting name="FlexCANEnableUserModeSupport" value="false"/>
+                           <setting name="FlexCANIpDevErrorDetect" value="true"/>
+                           <setting name="FlexCANEnableTimeStampSupport" value="false"/>
+                           <setting name="hrSrc" value="FLEXCAN_HRTIMERSRC_STM0"/>
+                           <setting name="is_memory_error_detection_and_correction_enabled" value="false"/>
+                           <setting name="memory_error_response" value="FLEXCAN_NORMAL_MODE"/>
+                        </struct>
+                        <struct name="timeout">
+                           <setting name="Name" value="FlexCAN_Timeout"/>
+                           <setting name="timeout_type" value="OSIF_COUNTER_DUMMY"/>
+                           <setting name="timeout_value" value="10000"/>
+                        </struct>
                      </config_set>
                   </instance>
                </instances>
